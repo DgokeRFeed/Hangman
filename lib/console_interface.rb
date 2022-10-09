@@ -1,6 +1,8 @@
 require "colorize"
 
+# Класс, ответственный за вывод игровых элементов на экран
 class ConsoleInterface
+    # Массив картинок виселицы, собирающийся из текстовых файлов по пути /data/figures
   FIGURES =
       Dir["#{__dir__}/../data/figures/*.txt"].
       sort.
@@ -10,6 +12,7 @@ class ConsoleInterface
     @game = game
   end
 
+  # Основной метод, собирающий все части интерфейса вместе и выводящий на экран
   def print_out
     puts <<~END
 
@@ -31,6 +34,8 @@ class ConsoleInterface
     FIGURES[@game.errors_made]
   end
 
+  # Метод выводит слово, которое игрок должен угадать
+  # Если буква еще не угадана, на ее месте выводится "__"
   def word_to_show
     result =
       @game.letters_to_guess.map do |letter|
